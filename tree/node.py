@@ -10,9 +10,11 @@ class BinaryNode(object):
     def __str__(self):
         return str(self._data)
 
-    @property
-    def data(self):
+    def get_data(self):
         return self._data
+
+    def set_data(self, data):
+        self._data = data
 
     def get_lchild(self):
         return self._lchild
@@ -26,6 +28,7 @@ class BinaryNode(object):
     def set_rchild(self, rchild):
         self._rchild = rchild
 
+    data = property(get_data, set_data)
     lchild = property(get_lchild, set_lchild)
     rchild = property(get_rchild, set_rchild)
 
