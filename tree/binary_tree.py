@@ -1,5 +1,6 @@
 # coding: utf8
 from queue.queue import Queue
+from stack.stack import Stack
 from tree.node import BinaryNode
 
 
@@ -18,11 +19,50 @@ class BinaryTree(object):
 
     @staticmethod
     def pre_order_traverse(root):
-        pass
+        """ please refer to http://learn.hackerearth.com/tutorial/trees/19/iterative-tree-traversals/
+        """
+        stack = Stack()
+        p = root
+        while True:
+            while p is not None:
+                # print node and store the node in the stack
+                print p,
+                stack.push(p)
+                p = p.lchild
+
+            # visit the right child
+            if not stack.is_empty():
+                p = stack.pop()
+                p = p.rchild
+
+            if stack.is_empty() and p is None:
+                break
+
+        print
 
     @staticmethod
     def in_order_traverse(root):
-        pass
+        """ please refer to http://learn.hackerearth.com/tutorial/trees/19/iterative-tree-traversals/
+        """
+        stack = Stack()
+        p = root
+        while True:
+            while p is not None:
+                # store a node in the stack and visit its left child
+                stack.push(p)
+                p = p.lchild
+
+            # if there are nodes in the stack to which we can move up, then pop it
+            if not stack.is_empty():
+                p = stack.pop()
+                print p,
+                # visit the right child
+                p = p.rchild
+
+            if stack.is_empty() and p is None:
+                break
+
+        print
 
     @staticmethod
     def post_order_traverse(root):
@@ -61,4 +101,6 @@ class BinaryTree(object):
 if __name__ == "__main__":
     root = BinaryTree.create_tree()
     BinaryTree.level_order_traverse(root)
+    BinaryTree.pre_order_traverse(root)
+    BinaryTree.in_order_traverse(root)
     BinaryTree.print_tree(root)
